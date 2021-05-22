@@ -11,24 +11,30 @@ declare var $ :any;
 })
 export class AppComponent {
   title = 'Roulette';
-constructor() {
+  nbreFoisImage = Array;
+  nbreImage = 3;
+  image = [
+    "../assets/img/star.png",
+    "../assets/img/flower.png",
+    "../assets/img/coin.png",
+    "../assets/img/mshroom.png",
+    "../assets/img/chomp.png",
+    "../assets/img/random.png",
+    "../assets/img/baseline_business.png",
+    "../assets/img/baseline_school.png"
+  ];
+
+constructor(
+) {
+    //this.nbreImage = document.getElementById('nbreImage_param');
 
 }
-  demo(){
-    var option = {
-      speed : '<span class="speed_param"></span>',
-      duration : '<span class="duration_param"></span>',
-      stopImageNumber : '<span class="stop_image_number_param"></span>',
-      startCallback : function() {
-        console.log('start');
-      },
-      slowDownCallback : function() {
-        console.log('slowDown');
-      },
-      stopCallback : function($stopElm) {
-        console.log('stop');
-      }
-    }
-    $('div.roulette').roulette(option);
-  }
+
+updateNbre(){
+  console.log(document.getElementById('nbreImage_param').innerHTML);
+  this.nbreImage = Number(document.getElementById('nbreImage_param').innerHTML);
+  console.log('nbreImage: ', this.nbreImage);
+}
+
+
 }

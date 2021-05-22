@@ -1,5 +1,12 @@
-(function($) {
+
+
+
+$(function($) {
+
+
+
 	var Roulettew = function(options) {
+
 
 		var defaultSettings = {
 			maxPlayCount : null, // x >= 0 or null
@@ -196,4 +203,4 @@
 			}
 		});
 	}
-})(jQuery);
+});

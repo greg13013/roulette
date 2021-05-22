@@ -1,4 +1,9 @@
+
+
 $(function(){
+
+
+
 	$('.roulette').find('img').hover(function(){
 		console.log($(this).height());
 	});
@@ -15,7 +20,7 @@ $(function(){
 			appendLogMsg('start');
       $('.numero').text('');
       $('.winner').text('');
-			$('#speed, #duration, #maxPlay').slider('disable');
+			$('#speed, #duration, #maxPlay, #nbreImage').slider('disable');
 			$('#stopImageNumber').spinner('disable');
 			$('.start').attr('disabled', 'true');
 			$('.stop').removeAttr('disabled');
@@ -26,21 +31,23 @@ $(function(){
 		},
 		stopCallback : function($stopElm) {
 			appendLogMsg('stop');
-			console.log(this.playCount);
+
       //$('.numero').text(this.stopImageNumber)
       $('.numero').append(this.stopImageNumber + ' | ')
       var resultat = $('.numero').text().replace(/\s/g,'')
        resultat = resultat.split('|');
-console.log(resultat);
+
+
       if (resultat[0] === resultat[1] && resultat[1] === resultat[2] ){
 
         $('.winner').append('Vous avez gagné !');
         return;
       }
 			if (p['maxPlayCount'] == this.playCount){
+			  $('.restant').append('Plus de partie disponible')
 			  return;
 			}
-      console.log(resultat[0]);
+
 			$('#speed, #duration').slider('enable');
 			$('#stopImageNumber').spinner('enable');
 			$('.start').removeAttr('disabled');
@@ -49,6 +56,7 @@ console.log(resultat);
 		}
 
 	}
+
 
 
 
@@ -63,9 +71,16 @@ console.log(resultat);
 	});
 	$('.stop').attr('disabled', 'true');
 	$('.start').click(function(){
-
 		rouletter.roulette('start');
 	});
+
+
+  $('#updateParam').click(function () {
+
+    rouletter = $('div.roulette');
+    rouletter.roulette(p);
+  });
+
 
 	//Update les parametre
 	var updateParamater = function(){
@@ -73,10 +88,27 @@ console.log(resultat);
 		p['duration'] = Number($('.duration_param').eq(0).text());
 		p['stopImageNumber'] = Number($('.stop_image_number_param').eq(0).text());
 		p['maxPlayCount'] = Number($('.max_param').eq(0).text());
+    p['nbreImage'] = Number($('.nbreImage_param').eq(0).text());
 
 		rouletter.roulette('option', p);
 	}
 
+
+  //Update Nombre d'image
+  var updateNbreImage = function (nbreImage){
+    $('.nbreImage_param').text(nbreImage);
+
+  }
+  $('#nbreImage').slider({
+    min: 1,
+    max: 10,
+    value : 3,
+    slide: function( event, ui ) {
+      updateNbreImage(ui.value);
+      updateParamater();
+    }
+  });
+  updateNbreImage($('#nbreImage').slider('value'));
 
 	//Update Max Play
   var updateMaxPlay = function (maxPlay){

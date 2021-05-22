@@ -316,6 +316,7 @@
 </div>
 
 <div class="content container" role="main">
+  <div class="h2 restant"></div>
   <div class="h2 winner"></div>
   <div style="height: 100px;" class="h3">
     Numero : <div class="numero"></div>
@@ -323,42 +324,26 @@
 
 
     <div class="row">
-      <div class="col-3">
+      <div class="col-3" *ngFor="let item of nbreFoisImage(nbreImage); let index = index">
+
         <div class="roulette_container" >
-          <div class="roulette" style="display:none;">
-            <img src="../assets/img/star.png"/>
-            <img src="../assets/img/flower.png"/>
-            <img src="../assets/img/coin.png"/>
-            <img src="../assets/img/mshroom.png"/>
-            <img src="../assets/img/chomp.png"/>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="roulette_container" >
-          <div class="roulette" style="display:none;">
-            <img src="../assets/img/star.png"/>
-            <img src="../assets/img/flower.png"/>
-            <img src="../assets/img/coin.png"/>
-            <img src="../assets/img/mshroom.png"/>
-            <img src="../assets/img/chomp.png"/>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="roulette_container" >
-          <div class="roulette" style="display:none;">
-            <img src="../assets/img/star.png"/>
-            <img src="../assets/img/flower.png"/>
-            <img src="../assets/img/coin.png"/>
-            <img src="../assets/img/mshroom.png"/>
-            <img src="../assets/img/chomp.png"/>
+
+          <div class="roulette" >
+            <img *ngFor="let itemImage of image;" src={{itemImage}}/>
           </div>
         </div>
       </div>
       <div class="col-3">
         <div class="right_container">
           <p class="demo_label">Paramater</p>
+
+          <button class="btn btn-large btn-primary" (click)="updateNbre()" id="updateParam"> START </button>
+
+
+          <div class="nbreImage_value param_label">
+            <span class="param_name">Nombre d'image :</span> <span id="nbreImage_param" class="nbreImage_param"></span>
+          </div>
+          <div id="nbreImage"> </div>
 
           <div class="max_value param_label">
             <span class="param_name">Max Play :</span> <span class="max_param"></span>
@@ -380,11 +365,8 @@
           </div>
           <input style="display: none" id="stopImageNumber" name="stopImageNumber"/>
           <span class="image_sample">
-							<img data-value="0"  src="../assets/img/star.png"/>
-							<img data-value="1"  src="../assets/img/flower.png"/>
-							<img data-value="2"  src="../assets/img/coin.png"/>
-							<img data-value="3"  src="../assets/img/mshroom.png"/>
-							<img data-value="4"  src="../assets/img/chomp.png"/>
+							<img *ngFor="let itemImage of image;let i = index" [attr.data-value]="i"  src={{itemImage}}/>
+
 							<img data-value="-1" src="../assets/img/random.png" title="random"/>
 						</span>
 
